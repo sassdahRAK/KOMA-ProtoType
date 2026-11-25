@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* KOMA design tokens — logo-derived teal / gold / heart-red           */
+/* ------------------------------------------------------------------ */
+:root {
+  --paper: #f7fafa;
+  --paper-deep: #eaf2f4;
+  --shell: #ffffff;
+  --pine: #14656f;
+  --pine-800: #17555e;
+  --pine-700: #1a6570;
+  --teal: #1e8e9c;
+  --teal-600: #16707c;
+  --teal-100: #cfe9ee;
+  --teal-50: #eef7f9;
+  --mint: #d8f0f3;
+  --saffron: #ee9e33;
+  --saffron-tint: #fdf1df;
+  --saffron-ink: #7a4a05;
+  --clay: #d8352f;
+  --clay-tint: #fbe7e5;
+  --clay-ink: #8e2019;
+  --ink: #10262b;
+  --ink-soft: #415b60;
+  --ink-faint: #5f797e;
+  --line: #dce8ea;
+  --krama-base: #fbefe0;
+  --focus-ring: #16707c;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+  }
+
+  /* Khmer is primary: when the document language is Khmer, Khmer glyphs lead. */
+  html[lang='km'] body {
+    font-family: 'Noto Sans Khmer', Manrope, system-ui, -apple-system, 'Segoe UI',
+      sans-serif;
+  }
+
+  html[lang='km'] .font-display {
+    font-family: 'Bricolage Grotesque', 'Noto Sans Khmer', Georgia, serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: rgba(30, 142, 156, 0.22);
+    color: #10262b;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  img,
+  svg {
+    display: block;
+  }
+
+  /* SearchField supplies its own clear control. */
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Global component classes                                            */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Woven krama band — horizontal. Retained for compatibility; not used in
+     the shell. Base is a warm cream that suits the logo palette. */
+  .krama {
+    height: 10px;
+    width: 100%;
+    background-color: var(--krama-base);
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(30, 142, 156, 0.9) 0 3px,
+        transparent 3px 12px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(30, 142, 156, 0.45) 0 2px,
+        transparent 2px 6px
+      );
+    background-blend-mode: multiply;
+  }
+
+  /* Woven krama band — vertical. Retained for compatibility. */
+  .krama-v {
+    height: 100%;
+    width: 10px;
+    background-color: var(--krama-base);
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(30, 142, 156, 0.9) 0 3px,
+        transparent 3px 12px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(30, 142, 156, 0.45) 0 2px,
+        transparent 2px 6px
+      );
+    background-blend-mode: multiply;
+  }
+
+  .card {
+    @apply rounded-[22px] border border-line bg-shell shadow-lift;
+  }
+
+  .mono-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.12em] text-ink-faint;
+  }
+
+  .measure {
+    max-width: 62ch;
+  }
+
+  .focusable {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2;
+    --tw-ring-offset-color: #f7fafa;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
